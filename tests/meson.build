@@ -7,11 +7,19 @@ date_test = executable('test-date-calculator',
 test('Date calculator', date_test)
 
 if get_option('ui-tests')
+date_window_sources = []
+foreach source : gnome_calculator_vala_sources
+  if source != 'gnome-calculator.vala'
+    date_window_sources += '../src/' + source
+  endif
+endforeach
 date_dialog_test = executable('test-date-dialog',
-  ['test-date-dialog.vala', '../lib/date-calculator.vala', '../src/math-date-dialog.vala'],
-  dependencies: [gtk, glib, gobject],
-  include_directories: config_h_dir,
-  c_args: ['-include', 'config.h'],
+  ['test-date-dialog.vala', date_window_sources, gnome_calculator_resources],
+  dependencies: gnome_calculator_deps,
+  link_with: [libcalculator, lib_mpfrg],
+  include_directories: gnome_calculator_includes,
+  vala_args: gnome_calculator_vala_flags,
+  c_args: gnome_calculator_c_flags,
 )
 test('Date dialog', date_dialog_test, env: ['LC_ALL=C', 'LANGUAGE=C'])
 endif

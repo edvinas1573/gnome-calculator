@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 public class MathDateDialog : Gtk.Dialog
 {
     internal Gtk.ComboBoxText operation;
@@ -114,3 +115,4 @@ public class MathDateDialog : Gtk.Dialog
         }
     }
 }
+

@@ -22,10 +22,27 @@ jobs:
         run: |
           meson setup _build -Dui-tests=true
           meson compile -C _build
+          glib-compile-schemas data
       - name: Run date and GTK integration tests
+        env:
+          GSETTINGS_SCHEMA_DIR: ${{ github.workspace }}/data
+          GSETTINGS_BACKEND: memory
+          DATE_TEST_SCREENSHOTS: ${{ github.workspace }}/_build/date-screenshots
         run: |
           for zone in UTC America/New_York Europe/Vilnius; do
             TZ="$zone" xvfb-run -a dbus-run-session -- meson test -C _build 'Date calculator' 'Date dialog' --print-errorlogs
           done
       - name: Run complete existing regression suite
+        env:
+          GSETTINGS_SCHEMA_DIR: ${{ github.workspace }}/data
+          GSETTINGS_BACKEND: memory
         run: xvfb-run -a dbus-run-session -- meson test -C _build --print-errorlogs
+      - name: Save GTK examples and test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: date-test-evidence
+          path: |
+            _build/date-screenshots
+            _build/meson-logs/testlog.txt
+          retention-days: 14

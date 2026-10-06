@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 /* Calendar arithmetic uses GLib.Date, independent of time zones and DST. */
 public errordomain DateCalculationError
 {
@@ -85,3 +86,4 @@ public class DateCalculator : Object
         return format (date);
     }
 }
+
