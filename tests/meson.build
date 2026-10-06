@@ -1,5 +1,21 @@
 if not get_option ('disable-ui')
 
+date_test = executable('test-date-calculator',
+  ['test-date-calculator.vala', '../lib/date-calculator.vala'],
+  dependencies: [glib, gobject],
+)
+test('Date calculator', date_test)
+
+if get_option('ui-tests')
+date_dialog_test = executable('test-date-dialog',
+  ['test-date-dialog.vala', '../lib/date-calculator.vala', '../src/math-date-dialog.vala'],
+  dependencies: [gtk, glib, gobject],
+  include_directories: config_h_dir,
+  c_args: ['-include', 'config.h'],
+)
+test('Date dialog', date_dialog_test, env: ['LC_ALL=C', 'LANGUAGE=C'])
+endif
+
 # Common
 gnome_calculator_tests_deps = [
   gtk,

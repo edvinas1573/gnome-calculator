@@ -46,6 +46,10 @@
   <menu id="primary_menu">
     <section>
       <item>
+        <attribute name="label" translatable="yes">Date Calculation</attribute>
+        <attribute name="action">win.date-calculation</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">_New Window</attribute>
         <attribute name="action">app.new-window</attribute>
       </item>

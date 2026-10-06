@@ -39,6 +39,7 @@ public class MathWindow : Hdy.ApplicationWindow
         { "redo", redo_cb, null, null, null },
         { "mode", mode_cb, "s", "\"basic\"", null },
         { "clear", clear_cb, null, null, null },
+        { "date-calculation", date_calculation_cb, null, null, null },
         { "close",close, null, null, null },
     };
 
@@ -77,6 +78,11 @@ public class MathWindow : Hdy.ApplicationWindow
     private void clear_cb ()
     {
         _display.clear_history ();
+    }
+
+    private void date_calculation_cb ()
+    {
+        new MathDateDialog (this);
     }
 
     private void mode_changed_cb ()

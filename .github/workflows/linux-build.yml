@@ -17,10 +17,15 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y valac gcc gettext itstool libgtk-3-dev libgtk-3-bin libgtksourceview-4-dev libmpc-dev libmpfr-dev libsoup2.4-dev libxml2-dev libgee-0.8-dev libhandy-1-dev meson ninja-build libgirepository1.0-dev xvfb dbus-x11
+          sudo apt-get install -y valac gcc gettext itstool libgtk-3-dev libgtk-3-bin libgtksourceview-4-dev libmpc-dev libmpfr-dev libsoup2.4-dev libxml2-dev libgee-0.8-dev libhandy-1-dev meson ninja-build libgirepository1.0-dev xvfb dbus-x11 at-spi2-core
       - name: Build complete application
         run: |
           meson setup _build -Dui-tests=true
           meson compile -C _build
-      - name: Run regression suite
+      - name: Run date and GTK integration tests
+        run: |
+          for zone in UTC America/New_York Europe/Vilnius; do
+            TZ="$zone" xvfb-run -a dbus-run-session -- meson test -C _build 'Date calculator' 'Date dialog' --print-errorlogs
+          done
+      - name: Run complete existing regression suite
         run: xvfb-run -a dbus-run-session -- meson test -C _build --print-errorlogs

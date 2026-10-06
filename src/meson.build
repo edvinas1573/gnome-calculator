@@ -1,5 +1,6 @@
 # gnome-calculator executable
 gnome_calculator_vala_sources = [
+  'math-date-dialog.vala',
   'gnome-calculator.vala',
   'math-buttons.vala',
   'math-converter.vala',
