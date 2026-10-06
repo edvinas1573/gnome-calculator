@@ -67,6 +67,8 @@ private int main (string[] args)
             check (rejected, "invalid days: " + invalid);
         }
         check (DateCalculator.parse_days (" 00042 ") == 42, "whole days");
+        check (DateCalculator.parse_days ("00008") == 8, "leading zeros are decimal");
+        check (DateCalculator.parse_days ("00009") == 9, "decimal nine with leading zeros");
         check (DateCalculator.parse_days ("0") == 0, "zero days");
         foreach (var subtract in new bool[] { false, true })
         {

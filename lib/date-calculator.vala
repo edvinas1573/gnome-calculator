@@ -40,7 +40,7 @@ public class DateCalculator : Object
             if (value[i] < '0' || value[i] > '9')
                 throw new DateCalculationError.INVALID_DAYS ("Enter a non-negative whole number");
         int64 days;
-        if (!int64.try_parse (value, out days) || days > MAX_DAYS)
+        if (!int64.try_parse (value, out days, null, 10) || days > MAX_DAYS)
             throw new DateCalculationError.INVALID_DAYS ("Day count is too large");
         return (int) days;
     }
