@@ -88,4 +88,3 @@ private int main (string[] args)
     stdout.printf ("PASS: date differences, leap days, add/subtract, boundaries and 6036 month roundtrips\n");
     return 0;
 }
-

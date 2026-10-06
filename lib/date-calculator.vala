@@ -86,4 +86,3 @@ public class DateCalculator : Object
         return format (date);
     }
 }
-

@@ -70,4 +70,3 @@ private int main (string[] args)
     stdout.printf ("PASS: real calculator window action, GTK inputs, operation changes, result labels and error recovery\n");
     return 0;
 }
-

@@ -115,4 +115,3 @@ public class MathDateDialog : Gtk.Dialog
         }
     }
 }
-
